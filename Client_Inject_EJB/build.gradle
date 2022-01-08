@@ -1,0 +1,19 @@
+plugins {
+    id 'war'
+}
+
+group 'barcan.florin'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'jakarta.servlet:jakarta.servlet-api:5.0.0'
+    implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.0.0'
+    implementation group: 'jakarta.ejb', name: 'jakarta.ejb-api', version: '4.0.0'
+    implementation 'org.glassfish.jersey.core:jersey-server:3.0.3'
+    implementation 'org.hibernate:hibernate-core:+','org.hibernate:hibernate-entitymanager:+',
+            'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:+'
+}

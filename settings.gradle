@@ -1,0 +1,5 @@
+rootProject.name = 'TPJAD_Tema_EjbJpa'
+include 'Client_Apel_JNDI'
+include 'Client_Inject_EJB'
+include 'Server'
+
