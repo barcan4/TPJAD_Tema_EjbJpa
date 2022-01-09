@@ -1,0 +1,5 @@
+# Project exclude paths
+/.gradle/
+/Client_Apel_JNDI/build/
+/Client_Inject_EJB/build/
+/Client_Inject_EJB/build/classes/java/main/

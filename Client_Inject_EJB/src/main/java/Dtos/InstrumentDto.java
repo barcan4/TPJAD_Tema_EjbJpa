@@ -8,6 +8,7 @@ public class InstrumentDto implements Serializable {
     private String name;
     private String type;
     private double price;
+    private ShopDto shopDto;
 
     public InstrumentDto() {
     }
@@ -17,6 +18,11 @@ public class InstrumentDto implements Serializable {
         this.name = name;
         this.type = type;
         this.price = price;
+    }
+
+    public InstrumentDto(Long id, String name, String type, double price, ShopDto shopDto) {
+        this(id, name, type, price);
+        this.shopDto = shopDto;
     }
 
     public Long getId() {
@@ -51,6 +57,14 @@ public class InstrumentDto implements Serializable {
         this.price = price;
     }
 
+    public ShopDto getShopDto() {
+        return shopDto;
+    }
+
+    public void setShopDto(ShopDto shopDto) {
+        this.shopDto = shopDto;
+    }
+
     @Override
     public String toString() {
         return "InstrumentDto{" +
@@ -58,6 +72,7 @@ public class InstrumentDto implements Serializable {
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", price=" + price +
+                ", shopDto=" + shopDto +
                 '}';
     }
 }

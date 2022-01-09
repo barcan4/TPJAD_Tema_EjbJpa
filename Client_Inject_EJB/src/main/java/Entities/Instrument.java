@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Instruments")
+@Table(name = "instruments")
 public class Instrument implements Serializable {
 
     @Id
@@ -14,6 +14,9 @@ public class Instrument implements Serializable {
     private String name;
     private String type;
     private double price;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Shop shop;
 
     public Instrument() {
     }
@@ -64,5 +67,13 @@ public class Instrument implements Serializable {
                 ", type='" + type + '\'' +
                 ", price=" + price +
                 '}';
+    }
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 }
