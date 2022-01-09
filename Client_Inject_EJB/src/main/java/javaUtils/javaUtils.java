@@ -49,6 +49,27 @@ public class javaUtils {
         return output.toString();
     }
 
+    public static String ShopInstrumentsToHtml(Collection<Instrument> instrumentCollection) {
+        if (instrumentCollection == null) {
+            return "";
+        }
+        StringBuilder output = new StringBuilder();
+
+        instrumentCollection.forEach(instrument -> {
+            output.append("\t<tr>\n");
+            output.append("\t\t<form action=\"\" method=\"POST\">\n");
+            output.append("\t\t\t<input type=\"hidden\" name=\"" + INSTRUMENT_ID_REQ_PARM + "\" value=\"").append(instrument.getIdInstrument()).append("\"></td>\n");
+            output.append("\t\t\t<td><input type=\"text\" name=\"" + INSTRUMENT_NAME_REQ_PARM + "\" value=\"").append(instrument.getName()).append("\"></td>\n");
+            output.append("\t\t\t<td><input type=\"text\" name=\"" + INSTRUMENT_TYPE_REQ_PARM + "\" value=\"").append(instrument.getType()).append("\"></td>\n");
+            output.append("\t\t\t<td><input type=\"text\" name=\"" + INSTRUMENT_PRICE_REQ_PARM + "\" value=\"").append(instrument.getPrice()).append("\"></td>\n");
+            output.append("\t\t\t<td><input type=\"button\" name=\"removeBtn\" value=\"Remove\"></td>\n");
+            output.append("\t\t</form>\n");
+            output.append("\t</tr>\n");
+        });
+
+        return output.toString();
+    }
+
     public static InstrumentDto InsEntityToInsDto(Instrument ins) {
         return ins != null ? new InstrumentDto(ins.getIdInstrument(), ins.getName(), ins.getType(), ins.getPrice()) : null;
     }

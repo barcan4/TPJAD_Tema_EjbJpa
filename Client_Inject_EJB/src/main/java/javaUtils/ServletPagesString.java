@@ -70,7 +70,26 @@ public class ServletPagesString {
             "\t\t<th>Type</th>\n" +
             "\t\t<th>Price</th>\n" +
             "\t<tr>\n";
-            //TODO de facut tabelul pentru fiecare shop
+
+    public static final String VIEW_SHOP_INS_PAGE = "<!DOCTYPE html>\n" +
+            "<html>\n" +
+            "<head>\n" +
+            "\t<title>View Shop Page</title>\n" +
+            "</head>\n" +
+            "<body>\n" +
+            "<table>\n" +
+            "\t<tr>\n" +
+            "\t\t<th>Name</th>\n" +
+            "\t\t<th>Type</th>\n" +
+            "\t\t<th>Price</th>\n" +
+            "\t<tr>\n";
+
+    public static final String VIEW_SHOP_INS_PAGE_END = "</table>\n" +
+            "<form action=\"\" method=\"POST\">\n" +
+            "\t<input type=\"submit\" name=\"addToShopBtn\" value=\"Add to Shop\">\n" +
+            "</form>\n" +
+            "</body>\n" +
+            "</html>";
 
     public static final String VIEW_INS_PAGE_END = "</table>\n" +
             "<form action=\"dispatcher\" method=\"POST\">\n" +

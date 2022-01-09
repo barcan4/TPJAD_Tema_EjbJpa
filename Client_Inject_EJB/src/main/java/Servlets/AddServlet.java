@@ -11,8 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import static javaUtils.javaUtils.*;
 import static javaUtils.ServletPagesString.*;
+import static javaUtils.javaUtils.InstrumentsToHtml;
+import static javaUtils.javaUtils.PageToClient;
 
 @WebServlet("/add")
 public class AddServlet extends HttpServlet {
@@ -22,15 +23,11 @@ public class AddServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO assert some shop and when sending response to send also the shops instruments
         Instrument instrument = getReqInstrumentEntity(req);
         if (instrument != null) {
-            //TODO set instrument belongs to which shop
             instrumentService.addIns(instrument);
-            //TODO set shop to include the new instrument
-            req.getSession().setAttribute("", "");
         }
-        PageToClient(resp, VIEW_INS_PAGE + InstrumentsToHtml(null) + VIEW_INS_PAGE_END);
+        PageToClient(resp, VIEW_INS_PAGE + InstrumentsToHtml(instrumentService.getAll()) + VIEW_INS_PAGE_END);
     }
 
     Instrument getReqInstrumentEntity(HttpServletRequest req) {

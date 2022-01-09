@@ -23,21 +23,17 @@ public class UpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO ca la deletePage in caz de cancel
-        PageToClient(resp, VIEW_INS_PAGE + InstrumentsToHtml(null) + VIEW_INS_PAGE_END);
+        PageToClient(resp, VIEW_INS_PAGE + InstrumentsToHtml(instrumentService.getAll()) + VIEW_INS_PAGE_END);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO verificare shop
         Instrument instrument = getReqInstrumentEntity(req);
-
         if (instrument != null) {
             Instrument updatedInstrument = updateReqInstrumentEntity(req, instrument);
-            //TODO actualizare lista la shop cu instrumentul
         }
 
-        PageToClient(resp, VIEW_INS_PAGE + InstrumentsToHtml(null) + VIEW_INS_PAGE_END);
+        PageToClient(resp, VIEW_INS_PAGE + InstrumentsToHtml(instrumentService.getAll()) + VIEW_INS_PAGE_END);
     }
 
     Instrument getReqInstrumentEntity(HttpServletRequest req) {
