@@ -11,6 +11,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Client_Apel_JNDI" />
+            <option value="$PROJECT_DIR$/Client_Apel_JNDI_WF" />
             <option value="$PROJECT_DIR$/Client_Inject_EJB" />
             <option value="$PROJECT_DIR$/Client_Inject_EJB_WF" />
             <option value="$PROJECT_DIR$/Server" />

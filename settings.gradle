@@ -3,4 +3,5 @@ include 'Client_Apel_JNDI'
 include 'Client_Inject_EJB'
 include 'Server'
 include 'Client_Inject_EJB_WF'
+include 'Client_Apel_JNDI_WF'
 
