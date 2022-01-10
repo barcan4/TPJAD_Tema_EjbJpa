@@ -21,16 +21,14 @@ import static javaUtils.javaUtils.PageToClient;
 @WebServlet("/delete")
 public class DeleteServlet extends HttpServlet {
 
-    private Properties JNDIProps;
-    private Context context;
-    private InstrumentService instrumentService;
+    private final InstrumentService instrumentService;
 
     public DeleteServlet() throws NamingException {
-        JNDIProps = new Properties();
+        Properties JNDIProps = new Properties();
         JNDIProps.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.enterprise.naming.impl.SerialInitContextFactory");
         JNDIProps.put("org.omg.CORBA.ORBInitialHost", "localhost");
         JNDIProps.put("org.omg.CORBA.ORBInitialPort", "3700");
-        context = new InitialContext(JNDIProps);
+        Context context = new InitialContext(JNDIProps);
         instrumentService = (InstrumentService) context.lookup("java:global/Client_Apel_JNDI-1.0-SNAPSHOT/InstrumentBean!Interfaces.InstrumentService");
     }
 

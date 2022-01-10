@@ -21,7 +21,7 @@ import static javaUtils.javaUtils.InsEntityToInsDto;
 @Remote(InstrumentService.class)
 public class InstrumentBean implements InstrumentService, InstrumentServiceR {
 
-    @PersistenceContext(unitName = "ejb")
+    @PersistenceContext(unitName = "jndi")
     private EntityManager entityManager;
 
     @Override

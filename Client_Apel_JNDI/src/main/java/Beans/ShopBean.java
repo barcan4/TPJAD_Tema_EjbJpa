@@ -25,7 +25,7 @@ import static javaUtils.javaUtils.ShopEntityToShopDto;
 @Remote(ShopService.class)
 public class ShopBean implements ShopService, ShopServiceR {
 
-    @PersistenceContext(unitName = "ejb")
+    @PersistenceContext(unitName = "jndi")
     private EntityManager entityManager;
 
     @Override
