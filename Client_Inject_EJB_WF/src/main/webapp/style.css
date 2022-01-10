@@ -1,0 +1,11 @@
+table, th, td {
+    border: 1px solid black;
+}
+table {
+    width: 10%;
+    margin-left: 100px;
+    margin-bottom: 15px;
+}
+#add {
+    margin-left: 100px;
+}
