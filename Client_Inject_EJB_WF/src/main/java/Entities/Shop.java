@@ -22,7 +22,7 @@ public class Shop implements Serializable {
         this.street = street;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "Shop")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shop")
     Collection<Instrument> instruments = new ArrayList<>();
 
     public Shop() {

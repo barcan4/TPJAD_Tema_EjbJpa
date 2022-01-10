@@ -4,13 +4,13 @@ import Dtos.InstrumentDto;
 import Entities.Instrument;
 import Interfaces.InstrumentService;
 import Interfaces.InstrumentServiceR;
-import jakarta.ejb.Local;
-import jakarta.ejb.Remote;
-import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 
+import javax.ejb.Local;
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
