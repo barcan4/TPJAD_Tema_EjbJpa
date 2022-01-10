@@ -9,4 +9,5 @@ public interface ShopServiceR {
     List<InstrumentDto> getAllInstrumentsDto(long idShop);
     ShopDto findShopDto(long index);
     ShopDto addInsToShop(InstrumentDto instrumentDto, ShopDto shopDto);
+    ShopDto removeInsFromShop(InstrumentDto insDto, ShopDto shopDto);
 }

@@ -1,5 +1,6 @@
 plugins {
     id 'war'
+    id 'java'
 }
 
 group 'barcan.florin'

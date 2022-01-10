@@ -80,9 +80,9 @@ public class InstrumentBean implements InstrumentService, InstrumentServiceR {
     public Instrument updateIns(Instrument ins) {
         Instrument instrument = findIns(ins.getIdInstrument());
         if (instrument != null) {
-            entityManager.createQuery("update Instrument instr set instr.name = " + ins.getName()
-                    + ", instr.type = " + ins.getType()
-                    + ", instr.price = " + ins.getPrice()
+            entityManager.createQuery("update Instrument instr set instr.name = '" + ins.getName()
+                    + "', instr.type = '" + ins.getType()
+                    + "', instr.price = " + ins.getPrice()
                     + " where instr.idInstrument = " + ins.getIdInstrument()).executeUpdate();
             return instrument;
         }

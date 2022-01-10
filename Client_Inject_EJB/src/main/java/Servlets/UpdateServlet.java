@@ -30,9 +30,8 @@ public class UpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Instrument instrument = getReqInstrumentEntity(req);
         if (instrument != null) {
-            Instrument updatedInstrument = updateReqInstrumentEntity(req, instrument);
+            updateReqInstrumentEntity(req, instrument);
         }
-
         PageToClient(resp, VIEW_INS_PAGE + InstrumentsToHtml(instrumentService.getAll()) + VIEW_INS_PAGE_END);
     }
 
@@ -44,22 +43,22 @@ public class UpdateServlet extends HttpServlet {
         return instrumentService.findIns(Long.parseLong(id));
     }
 
-    Instrument updateReqInstrumentEntity(HttpServletRequest req, Instrument instrument) {
+    void updateReqInstrumentEntity(HttpServletRequest req, Instrument instrument) {
         String insName = req.getParameter(INSTRUMENT_NAME_REQ_PARM);
         if (insName == null || insName.length() == 0) {
-            return null;
+            return;
         }
         String insType = req.getParameter(INSTRUMENT_TYPE_REQ_PARM);
         if (insType == null || insType.length() == 0) {
-            return null;
+            return;
         }
         String price = req.getParameter(INSTRUMENT_PRICE_REQ_PARM);
         if (price == null || price.length() == 0) {
-            return null;
+            return;
         }
         instrument.setName(insName);
         instrument.setType(insType);
         instrument.setPrice(Double.parseDouble(price));
-        return instrumentService.updateIns(instrument);
+        instrumentService.updateIns(instrument);
     }
 }

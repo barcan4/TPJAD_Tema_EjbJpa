@@ -16,6 +16,7 @@ public class Instrument implements Serializable {
     private double price;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="idShop")
     private Shop shop;
 
     public Instrument() {

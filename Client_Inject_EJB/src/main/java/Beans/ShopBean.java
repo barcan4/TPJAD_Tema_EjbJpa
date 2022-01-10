@@ -14,6 +14,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static javaUtils.javaUtils.InsEntityToInsDto;
@@ -35,18 +36,32 @@ public class ShopBean implements ShopService, ShopServiceR {
     }
 
     @Override
+    public List<Shop> getShops() {
+        TypedQuery<Shop> query = entityManager.createQuery("select shop from Shop shop", Shop.class);
+        return query.getResultList();
+    }
+
+    @Override
     public Shop findShop(long idShop) {
         return entityManager.find(Shop.class, idShop);
     }
 
     @Override
     public Shop addInsToShop(Instrument ins, Shop shop) {
-        shop.getInstruments().add(ins);
-        ins.setShop(shop);
+        Shop shopMerge = entityManager.merge(shop);
+        Instrument insMerge = entityManager.merge(ins);
+        shopMerge.getInstruments().add(insMerge);
+        insMerge.setShop(shop);
+        return shopMerge;
+    }
 
-        entityManager.persist(shop);
-        entityManager.persist(ins);
-        return shop;
+    @Override
+    public Shop removeInsFromShop(Instrument ins, Shop shop) {
+        Shop shopMerge = entityManager.merge(shop);
+        Instrument insMerge = entityManager.merge(ins);
+        shopMerge.getInstruments().remove(insMerge);
+        insMerge.setShop(null);
+        return shopMerge;
     }
 
     @Override
@@ -73,5 +88,25 @@ public class ShopBean implements ShopService, ShopServiceR {
         Shop shop = findShop(shopDto.getId());
         Instrument ins = instrumentBean.findIns(instrumentDto.getId());
         return ShopEntityToShopDto(addInsToShop(ins, shop));
+    }
+
+    @Override
+    public ShopDto removeInsFromShop(InstrumentDto insDto, ShopDto shopDto) {
+        insDto.setShopDto(null);
+        shopDto.getInstrumentDtos().remove(insDto);
+        Shop shop = findShop(shopDto.getId());
+        Instrument ins = findIns(insDto.getId());
+        return ShopEntityToShopDto(removeInsFromShop(ins, shop));
+    }
+
+    @Override
+    public Collection<Instrument> getFreeIns() {
+        TypedQuery<Instrument> query = entityManager.createQuery("select ins from Instrument ins where ins.shop is null", Instrument.class);
+        return query.getResultList();
+    }
+
+    @Override
+    public Instrument findIns(long index) {
+        return entityManager.find(Instrument.class, index);
     }
 }
