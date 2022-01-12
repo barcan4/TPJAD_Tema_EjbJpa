@@ -1,7 +1,5 @@
 package javaUtils;
 
-import Dtos.InstrumentDto;
-import Dtos.ShopDto;
 import Entities.Instrument;
 import Entities.Shop;
 
@@ -127,13 +125,5 @@ public class javaUtils {
         });
         return output.toString();
 
-    }
-
-    public static InstrumentDto InsEntityToInsDto(Instrument ins) {
-        return ins != null ? new InstrumentDto(ins.getIdInstrument(), ins.getName(), ins.getType(), ins.getPrice()) : null;
-    }
-
-    public static ShopDto ShopEntityToShopDto(Shop shop) {
-        return shop != null ? new ShopDto(shop.getIdShop(), shop.getName(), shop.getCity(), shop.getStreet()) : null;
     }
 }

@@ -1,29 +1,21 @@
 package Beans;
 
-import Dtos.InstrumentDto;
-import Dtos.ShopDto;
 import Entities.Instrument;
 import Entities.Shop;
 import Interfaces.ShopService;
-import Interfaces.ShopServiceR;
-import jakarta.ejb.Local;
 import jakarta.ejb.Remote;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static javaUtils.javaUtils.InsEntityToInsDto;
-import static javaUtils.javaUtils.ShopEntityToShopDto;
 
 @Stateless
-@Local(ShopServiceR.class)
 @Remote(ShopService.class)
-public class ShopBean implements ShopService, ShopServiceR {
+public class ShopBean implements ShopService {
 
     @PersistenceContext(unitName = "jndi")
     private EntityManager entityManager;
@@ -62,41 +54,6 @@ public class ShopBean implements ShopService, ShopServiceR {
         shopMerge.getInstruments().remove(insMerge);
         insMerge.setShop(null);
         return shopMerge;
-    }
-
-    @Override
-    public List<InstrumentDto> getAllInstrumentsDto(long idShop) {
-        List<InstrumentDto> instrumentDtoList = new ArrayList<>();
-        List<Instrument> instrumentList = getAllInstruments(idShop);
-        for (Instrument instrument: instrumentList) {
-            InstrumentDto instrumentDto = InsEntityToInsDto(instrument);
-            instrumentDtoList.add(instrumentDto);
-        }
-        return instrumentDtoList;
-    }
-
-    @Override
-    public ShopDto findShopDto(long index) {
-        return ShopEntityToShopDto(findShop(index));
-    }
-
-    @Override
-    public ShopDto addInsToShop(InstrumentDto instrumentDto, ShopDto shopDto) {
-        instrumentDto.setShopDto(shopDto);
-        shopDto.getInstrumentDtos().add(instrumentDto);
-        InstrumentBean instrumentBean = new InstrumentBean();
-        Shop shop = findShop(shopDto.getId());
-        Instrument ins = instrumentBean.findIns(instrumentDto.getId());
-        return ShopEntityToShopDto(addInsToShop(ins, shop));
-    }
-
-    @Override
-    public ShopDto removeInsFromShop(InstrumentDto insDto, ShopDto shopDto) {
-        insDto.setShopDto(null);
-        shopDto.getInstrumentDtos().remove(insDto);
-        Shop shop = findShop(shopDto.getId());
-        Instrument ins = findIns(insDto.getId());
-        return ShopEntityToShopDto(removeInsFromShop(ins, shop));
     }
 
     @Override

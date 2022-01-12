@@ -1,25 +1,20 @@
 package Beans;
 
-import Dtos.InstrumentDto;
 import Entities.Instrument;
 import Interfaces.InstrumentService;
-import Interfaces.InstrumentServiceR;
-import jakarta.ejb.Local;
 import jakarta.ejb.Remote;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static javaUtils.javaUtils.InsEntityToInsDto;
 
 @Stateless
-@Local(InstrumentServiceR.class)
 @Remote(InstrumentService.class)
-public class InstrumentBean implements InstrumentService, InstrumentServiceR {
+public class InstrumentBean implements InstrumentService {
 
     @PersistenceContext(unitName = "jndi")
     private EntityManager entityManager;
@@ -31,32 +26,9 @@ public class InstrumentBean implements InstrumentService, InstrumentServiceR {
     }
 
     @Override
-    public InstrumentDto addIns(InstrumentDto insDto) {
-        Instrument ins = new Instrument(insDto.getName(), insDto.getType(), insDto.getPrice());
-        return InsEntityToInsDto(addIns(ins));
-    }
-
-    @Override
-    public List<InstrumentDto> getAllDto() {
-        List<InstrumentDto> instrumentDtoList = new ArrayList<>();
-        List<Instrument> instrumentList = getAll();
-        for (Instrument instrument: instrumentList) {
-            InstrumentDto instrumentDto = InsEntityToInsDto(instrument);
-            instrumentDtoList.add(instrumentDto);
-        }
-        return instrumentDtoList;
-    }
-
-    @Override
     public List<Instrument> getAll() {
         TypedQuery<Instrument> query = entityManager.createQuery("SELECT ins from Instrument ins", Instrument.class);
         return query.getResultList();
-    }
-
-    @Override
-    public InstrumentDto deleteIns(InstrumentDto insDto) {
-        Instrument ins = findIns(insDto.getId());
-        return InsEntityToInsDto(deleteIns(ins));
     }
 
     @Override
@@ -64,11 +36,6 @@ public class InstrumentBean implements InstrumentService, InstrumentServiceR {
         Instrument instrument = findIns(ins.getIdInstrument());
         entityManager.remove(instrument);
         return instrument;
-    }
-
-    @Override
-    public InstrumentDto findInsDto(long index) {
-        return InsEntityToInsDto(findIns(index));
     }
 
     @Override
@@ -85,19 +52,6 @@ public class InstrumentBean implements InstrumentService, InstrumentServiceR {
                     + "', instr.price = " + ins.getPrice()
                     + " where instr.idInstrument = " + ins.getIdInstrument()).executeUpdate();
             return instrument;
-        }
-        return null;
-    }
-
-    @Override
-    public InstrumentDto updateIns(InstrumentDto insDto) {
-        InstrumentDto instrumentDto = findInsDto(insDto.getId());
-        if (instrumentDto != null) {
-            Instrument ins = findIns(insDto.getId());
-            ins.setName(insDto.getName());
-            ins.setType(insDto.getType());
-            ins.setPrice(insDto.getPrice());
-            return InsEntityToInsDto(ins);
         }
         return null;
     }
